@@ -51,7 +51,7 @@ def health() -> Response:
     return Response(status_code=200)
 
 
-page_range = Form(default=None, description="Page range to convert, specify comma separated page numbers or ranges. Example: '0,5-10,20'", example="0,5-10,20")  # fmt: off
+page_range = Form(default="", description="Page range to convert, specify comma separated page numbers or ranges. Example: '0,5-10,20'")  # fmt: off
 force_ocr = Form(default=False, description="Force OCR on all pages of the PDF.  Defaults to False.  This can lead to worse results if you have good text in your PDFs (which is true in most cases).")  # fmt: off
 paginate_output = Form(default=False, description="Whether to paginate the output.  Defaults to False.  If set to True, each page of the output will be separated by a horizontal rule that contains the page number (2 newlines, {PAGE_NUMBER}, 48 - characters, 2 newlines).")  # fmt: off
 output_format = Form(default="markdown", description="The format to output the text in.  Can be 'markdown', 'json', or 'html'.  Defaults to 'markdown'.")  # fmt: off
