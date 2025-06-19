@@ -17,7 +17,7 @@ from marker.settings import settings
 
 from server.exceptions import FailedToConvertPDFException
 from server.logger import logger
-from server.schemas import Languages, OutputFormat, ParseResponse
+from server.schemas import OutputFormat, ParseResponse
 from server.security import check_api_key
 
 app_data = {}
@@ -52,7 +52,6 @@ def health() -> Response:
 
 
 page_range = Form(default=None, description="Page range to convert, specify comma separated page numbers or ranges. Example: '0,5-10,20'", example="0,5-10,20")  # fmt: off
-languages = Form(default=None, description="Comma separated list of languages to use for OCR. Must be either the names or codes from from https://github.com/VikParuchuri/surya/blob/master/surya/recognition/languages.py.", example=None)  # fmt: off
 force_ocr = Form(default=False, description="Force OCR on all pages of the PDF.  Defaults to False.  This can lead to worse results if you have good text in your PDFs (which is true in most cases).")  # fmt: off
 paginate_output = Form(default=False, description="Whether to paginate the output.  Defaults to False.  If set to True, each page of the output will be separated by a horizontal rule that contains the page number (2 newlines, {PAGE_NUMBER}, 48 - characters, 2 newlines).")  # fmt: off
 output_format = Form(default="markdown", description="The format to output the text in.  Can be 'markdown', 'json', or 'html'.  Defaults to 'markdown'.")  # fmt: off
@@ -63,7 +62,6 @@ file = File(..., description="The PDF file to convert.")  # fmt: off
 @app.post("/marker/upload", tags=["Marker"], response_model=ParseResponse, dependencies=[Security(check_api_key)])
 async def convert_pdf_upload(
     page_range: Optional[str] = page_range,
-    languages: Optional[Languages] = languages,
     force_ocr: Optional[bool] = force_ocr,
     paginate_output: Optional[bool] = paginate_output,
     output_format: Optional[OutputFormat] = output_format,
@@ -88,7 +86,6 @@ async def convert_pdf_upload(
     options = {
         "filepath": filepath,
         "page_range": page_range,
-        "languages": languages,
         "force_ocr": force_ocr,
         "paginate_output": paginate_output,
         "output_format": output_format,

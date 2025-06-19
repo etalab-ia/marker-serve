@@ -72,7 +72,6 @@ Process a document.
 **Parameters:**
 - `file`: The PDF file to process (required)
 - `page_range`: Page range to convert (e.g. "0,5-10,20")
-- `languages`: Comma separated list of languages for OCR
 - `force_ocr`: Force OCR on all pages (default: false)
 - `paginate_output`: Whether to paginate the output (default: false)
 - `output_format`: Output format - "markdown", "json", or "html" (default: "markdown")
