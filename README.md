@@ -1,4 +1,4 @@
-# Albert Marker
+# Marker serve
 
 A FastAPI server for document processing using the marker-pdf library for production environments, inspired by the [official Marker server script](https://github.com/VikParuchuri/marker/blob/b8a4c5d8769ed40f83d0ac9b452e85532ac7cd47/marker/scripts/server.py).
 
